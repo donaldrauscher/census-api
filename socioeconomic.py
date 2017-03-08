@@ -53,4 +53,4 @@ zip_data.loc[zip_data.education_denominator < min_sample, ['hs_graduate','colleg
 # export
 zip_data['zip'] = zip_data.zip.apply(lambda x: str(x).zfill(5))
 zip_data = zip_data[['zip','renter','mortgage','hs_graduate','college_graduate','median_income','household_size']]
-zip_data.to_csv('./socioeconomic.csv', index=False, quoting=csv.QUOTE_ALL)
+zip_data.to_csv('./outputs/socioeconomic.csv', index=False, quoting=csv.QUOTE_ALL)
