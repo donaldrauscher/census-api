@@ -23,6 +23,7 @@ def to_pd(j):
 
 # download states
 states = requests.get(url, params={'get':','.join([k for k,v in variables.items()]), 'for':'state:*', 'key':key})
+states.raise_for_status()
 states = to_pd(states.text)
 
 # download zips for each state
@@ -31,6 +32,7 @@ zip_data = list()
 
 for sc in state_codes:
 	temp = requests.get(url, params={'get':','.join([k for k,v in variables.items()]), 'for':'zip code tabulation area:*', 'in': 'state:%s' % str(sc).zfill(2), 'key':key})
+	temp.raise_for_status()
 	temp_df = to_pd(temp.text)
 	zip_data.append(temp_df)
 
