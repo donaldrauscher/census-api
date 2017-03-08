@@ -23,8 +23,6 @@ variables = {
 	'B07009_001E':'education_denominator',
 	'B25010_001E':'household_size'
 }
-api_var = [k for k,v in variables.items()]
-api_var_name = [v for k,v in variables.items()]
 
 # convert json results into pandas df
 def to_pd(j):
@@ -35,7 +33,7 @@ def to_pd(j):
 	return df
 
 # download data by zip
-zip_data = requests.get(url, params={'get':','.join(api_var), 'for':'zip code tabulation area:*', 'key':key})
+zip_data = requests.get(url, params={'get':','.join([k for k,v in variables.items()]), 'for':'zip code tabulation area:*', 'key':key})
 zip_data.raise_for_status()
 zip_data = to_pd(zip_data.text)
 zip_data.rename(columns={**variables,'zip code tabulation area':'zip'}, inplace=True)
